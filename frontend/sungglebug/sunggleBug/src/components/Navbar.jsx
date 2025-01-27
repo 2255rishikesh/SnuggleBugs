@@ -1,18 +1,17 @@
-import { AppBar, Toolbar, Typography } from '@mui/material'
+import { AppBar, Button, Toolbar, Typography } from '@mui/material'
 import React from 'react'
-
-const Navbar = () => {
+import { Link } from 'react-router'
+function Navbar () 
+ {
   return (
     <div>
      <AppBar position='static'>
         <Toolbar>
-            <Typography variant='h6' marginRight={"auto"}>Blog</Typography>
+            <Typography variant='h6' marginRight={"auto"}></Typography>
             <Link to="/">
-                <Button style={{color:"white"}}>Home</Button>
+                <Button style={{color:"white"}}></Button>
             </Link>
-            <Link to="/add">
-                <Button style={{color:"white"}}>Add</Button>
-            </Link>
+            <h1>b</h1>
         </Toolbar>
     </AppBar>
     </div>
