@@ -7,11 +7,11 @@ function Navbar ()
     <div>
      <AppBar position='static'>
         <Toolbar>
-            <Typography variant='h6' marginRight={"auto"}></Typography>
+            <Typography variant='h6' marginRight={"auto"}>LOVE AT FIRST CRY</Typography>
             <Link to="/">
                 <Button style={{color:"white"}}></Button>
             </Link>
-            <h1>b</h1>
+            
         </Toolbar>
     </AppBar>
     </div>

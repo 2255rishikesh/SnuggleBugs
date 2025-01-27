@@ -35,7 +35,7 @@ const Home = () => {
   const category =[
     {
         title: 'Shamboo',
-        image: 'https://cdn.fcglcdn.com/brainbees/images/products/583x720/3437932a.webp'
+        image: 'https://cdn.fcglcdn.com/brainbees/images/products/583x720/3437932a.web'
     }
   ]
 
@@ -94,7 +94,7 @@ const Home = () => {
     <div style={{ overflowX: 'auto', flexWrap: 'nowrap', }}>
         {category.map(x=>(
             <div>
-                
+              
             </div>
         ))}
 
