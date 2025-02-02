@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Card, CardActionArea, CardContent, CardMedia, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { Button, Card, CardActionArea, CardContent, CardMedia, Grid, IconButton, Stack, Typography } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const Home = () => {
+  
   const data = [
     {
+      _id:'fghjk',
       image: 'https://cdn.fcglcdn.com/brainbees/images/products/219x265/552253a.webp',
       title: 'Sebamed Baby Gentle Wash|pH 5.5|Baby Body Wash|Soap Free|Tear Free|400 ml',
       description: 'MRP:600',
@@ -27,15 +29,14 @@ const Home = () => {
   ];
 
   const banner = [
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFVAmnPC7tu-yviXLUgisuprSnb3PPZUrF6A&s',
-    'https://img.freepik.com/free-vector/hand-drawn-baby-shower-facebook-cover_23-2150566726.jpg?t=st=1737954525~exp=1737958125~hmac=7360d1892638707cdd0461642e73761e2d28e2d14d7887a38911fab813c75e1a&w=1380',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3xQzTTd20lYXv2qFy5hoHztG7PxbCq0-OFY8&s',
+    'https://mumzonepregnancytips.wordpress.com/wp-content/uploads/2014/07/cropped-hd-happy-baby-happy-mom-banner.jpg ',
+    'https://t3.ftcdn.net/jpg/05/94/30/44/360_F_594304427_NqCOYmISHLSmVqwLTmtRSMjAgqdUaVwz.jpg',
   ];
 
-  const category =[
+  const category = [
     {
-        title: 'Shamboo',
-        image: 'https://cdn.fcglcdn.com/brainbees/images/products/583x720/3437932a.web'
+      title: 'Shamboo',
+      image: 'https://cdn.fcglcdn.com/brainbees/images/products/583x720/3437932a.web'
     }
   ]
 
@@ -52,80 +53,86 @@ const Home = () => {
       (prevIndex) => (prevIndex - 1 + banner.length) % banner.length
     );
   };
+  const handleProduct= (id)=>{
+
+  }
   return (
     <Stack padding={0}>
-        <div style={{ position: 'relative' }}>
-      {/* Left Arrow Button */}
-      <IconButton
-        onClick={prevImage}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '10px',
-          transform: 'translateY(-50%)',
-          zIndex: 1,
-        }}
-      >
-        <ArrowBackIos style={{ color: '#fff' }} />
-      </IconButton>
+      <div style={{ position: 'relative' }}>
+        {/* Left Arrow Button */}
+        <IconButton
+          onClick={prevImage}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '10px',
+            transform: 'translateY(-50%)',
+            zIndex: 1,
+          }}
+        >
+          <ArrowBackIos style={{ color: '#fff' }} />
+        </IconButton>
 
-      {/* Image */}
-      <img
-        src={banner[currentImageIndex]}
-        width="100%"
-        alt="Banner"
-        style={{ objectFit: 'cover' }}
-      />
+        {/* Image */}
+        <img
+          src={banner[currentImageIndex]}
+          width="100%"
+          alt="Banner"
+          style={{ objectFit: 'cover' }}
+        />
 
-      {/* Right Arrow Button */}
-      <IconButton
-        onClick={nextImage}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          right: '10px',
-          transform: 'translateY(-50%)',
-          zIndex: 1,
-        }}
-      >
-        <ArrowForwardIos style={{ color: '#fff' }} />
-      </IconButton>
-    </div>
-    <div style={{ overflowX: 'auto', flexWrap: 'nowrap', }}>
-        {category.map(x=>(
-            <div>
-              
-            </div>
+        {/* Right Arrow Button */}
+        <IconButton
+          onClick={nextImage}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '10px',
+            transform: 'translateY(-50%)',
+            zIndex: 1,
+          }}
+        >
+          <ArrowForwardIos style={{ color: '#fff' }} />
+        </IconButton>
+      </div>
+      <div style={{ overflowX: 'auto', flexWrap: 'nowrap', }}>
+        {category.map(x => (
+          <div>
+
+          </div>
         ))}
 
-    </div>
+      </div>
       {/* Scrollable Container */}
-      <Grid container spacing={3} style={{ background: "#000", paddingBottom: "20px", overflowX: 'auto', flexWrap: 'nowrap' }}>
+      <Grid container spacing={3} style={{ background: "#000", paddingBottom: "20px", overflowX: 'auto', flexWrap: 'nowrap',paddingTop:"29px" }}>
         {data.map((item, index) => (
+          <Button onClick={() => window.location.href = `/product/`}>
           <Grid item key={index}>
-            <Card sx={{ width: "200px", marginRight: "10px" }}>
-              <CardActionArea sx={{ minHeight: "300px", maxHeight: '450px' }}>
-                <CardMedia
-                  component="img"
-                  image={item.image}
-                  sx={{ width: "100%", height: "auto", padding: 1 }}
-                  alt={item.title}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {item.title}
-                  </Typography>
-                  <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
-                    {item.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Grid>
+              <Card sx={{ width: "200px", marginRight: "10px" }}>
+                <CardActionArea sx={{ minHeight: "300px", maxHeight: '450px' }}>
+                  <CardMedia
+                    component="img"
+                    image={item.image}
+                    sx={{ width: "100%", height: "auto", padding: 1 }}
+                    alt={item.title}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {item.title}
+                    </Typography>
+                    <Typography variant="subtitle1" sx={{ color: 'text.secondary' }}>
+                      {item.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          </Button>
         ))}
       </Grid>
     </Stack>
   );
 };
+
 
 export default Home;
