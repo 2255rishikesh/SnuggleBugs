@@ -35,7 +35,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
   },
 }));
-//poda//
 
 
 function Navbar () 
