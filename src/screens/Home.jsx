@@ -3,6 +3,9 @@ import { Button, Card, CardActionArea, CardContent, CardMedia, Grid, IconButton,
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 const Home = () => {
+
+  console.log("fghjk");
+  
   
   const data = [
     {

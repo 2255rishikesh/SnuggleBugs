@@ -1,57 +1,59 @@
-import {  AppBar, Button, InputBase, Toolbar, Typography } from '@mui/material'
-import React from 'react'
-import { Link } from 'react-router'
-import { styled, alpha } from '@mui/material/styles'
-const SearchInput = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+import React from 'react';
+import HomeIcon from '@mui/icons-material/Home';
+import ChildFriendlyIcon from '@mui/icons-material/ChildFriendly';
+import PregnantWomanIcon from '@mui/icons-material/PregnantWoman';
+import LoginIcon from '@mui/icons-material/Login';
+import PersonIcon from '@mui/icons-material/Person';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+
+const NAVIGATION = [
+  {
+    segment: '',
+    title: 'Home',
+    icon: <HomeIcon />,
   },
-  marginLeft: theme.spacing(2),
-  width: 'auto',
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft:' calc(1em + ${theme.spacing(4)}) ',
-      transition: theme.transitions.create('width'),
-      width: '12ch',
-      '&:focus': {
-          width: '20ch',
-      },
+  {
+    segment: 'baby-care',
+    title: 'Baby Care',
+    icon: <ChildFriendlyIcon />,
   },
-}));
+  {
+    segment: 'pregnancy-care',
+    title: 'Pregnancy Care',
+    icon: <PregnantWomanIcon />,
+  },
+  {
+    segment: 'login',
+    title: 'Login',
+    icon: <LoginIcon />,
+  },
+  {
+    segment: 'user',
+    title: 'User',
+    icon: <PersonIcon />,
+  },
+  {
+    segment: 'admin',
+    title: 'Admin',
+    icon: <AdminPanelSettingsIcon />,
+  },
+];
 
-
-function Navbar () 
- {
+function NavBar() {
   return (
-    <div>
-     <AppBar position='static'>
-        <Toolbar>
-            <Typography variant='h6' marginRight={"auto"}> THE PUREST LOVE FROM THE VERY START</Typography> 
-            <Link to="/">
-                <Button style={{color:"white"}}></Button>
-            </Link>
-            
-        </Toolbar>
-    </AppBar>
-    </div>
-  )
+    <nav className="navbar">
+      <ul className="navbar-list">
+        {NAVIGATION.map((item) => (
+          <li key={item.title} className="navbar-item">
+            <a  href={`/${item.segment}`} className="navbar- ">
+              {item.icon}
+              <span>{item.title}</span>
+            </a >
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 }
 
-export default Navbar
+export default NavBar;
