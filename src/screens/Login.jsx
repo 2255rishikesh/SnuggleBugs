@@ -32,7 +32,7 @@ const Login = () => {
           />
         <br></br>
            <button varient='contained'className='button' type="submit" >Login</button>
-           <a href=''><u>Signup</u></a>
+           <a href='/signup'><u>Signup</u></a>
           </div>
         </form>
       </div>    </>

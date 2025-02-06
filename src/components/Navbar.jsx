@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Tooltip, InputBase, Button } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import { Menu as MenuIcon, Search as SearchIcon, Bookmarks as LibraryIcon } from '@mui/icons-material';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -40,7 +40,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -49,7 +49,7 @@ export default function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-     
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -62,13 +62,13 @@ export default function NavBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit'
+              color: 'inherit',
             }}
           >
-            
+            {/* Add your site name here */}
+            My Site
           </Typography>
-          <Box className="mr-auto ml-5"> 
-    
+          <Box sx={{ flexGrow: 1, display: 'flex' }} justifyContent="flex-start">
             <Link to="/products">
               <Button color="inherit">Products</Button>
             </Link>
@@ -80,7 +80,6 @@ export default function NavBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-
             />
           </Search>
           <Box>
@@ -104,10 +103,10 @@ export default function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={()=>{navigate("/sign-in");handleCloseUserMenu()}}>
+              <MenuItem onClick={() => { navigate("/login"); handleCloseUserMenu(); }}>
                 Sign In
               </MenuItem>
-              <MenuItem onClick={handleCloseUserMenu}>
+              <MenuItem onClick={() => { navigate("/cart"); handleCloseUserMenu(); }}>
                 My Cart
               </MenuItem>
             </Menu>
@@ -115,7 +114,5 @@ export default function NavBar() {
         </Toolbar>
       </Container>
     </AppBar>
-
   );
-  
 }
