@@ -6,7 +6,6 @@ import Home from './screens/Home';
 // Import other screens as needed
 
 function Router() {
-  console.log("dfghjk")
   return (
     <Routes>
       <Route path="/" element={<Home />} />

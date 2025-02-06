@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, CardActionArea, CardContent, CardMedia, Grid, IconButton, Stack, Typography } from '@mui/material';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import NavBar from '../components/Navbar';
 
 const Home = () => {
 
@@ -60,6 +61,8 @@ const Home = () => {
 
   }
   return (
+    <>
+    <NavBar/>
     <Stack padding={0}>
       <div style={{ position: 'relative' }}>
         {/* Left Arrow Button */}
@@ -134,6 +137,7 @@ const Home = () => {
         ))}
       </Grid>
     </Stack>
+    </>
   );
 };
 
