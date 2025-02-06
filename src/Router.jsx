@@ -1,19 +1,19 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';  // Correct for defining routes
-import Product from './screens/Product';
-import Login from './screens/Login';
-import Home from './screens/Home';
-// Import other screens as needed
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Home from './Screens/Home'
+import Login from './Screens/Login'
+import Signup from './Screens/Signup'
 
 function Router() {
   return (
+    <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/product" element={<Product />} />
-      {/* Add other routes as needed */}
+        <Route path='/' element={<Home/>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/signup' element={<Signup/>} />
     </Routes>
-  );
+    </BrowserRouter>
+  )
 }
 
-export default Router;
+export default Router

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './styles/Login.css';
+import { TextField } from '@mui/material';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,23 +13,21 @@ const Login = () => {
 
   return (
     <>
-      <div style={{ backgroundImage: `url(./src/assets/logo.jpg)`, height:"100vh" }} className="login-background">
+      <div style={{ backgroundImage: `url(../assets/logo.jpg)`, height:"100vh" }} className="login-background">
         <h1>Login</h1>
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <form onSubmit={handleLogin} style={{flexDirection:"column"}}>
+         
+            <TextField
+          id="outlined-text-input"
+          label="Email"
+          type="email"
+        />
+            <TextField
+          id="outlined-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+        />
           <button type="submit">Login</button>
         </form>
       </div>
