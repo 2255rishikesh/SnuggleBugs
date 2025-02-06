@@ -33,9 +33,9 @@ input:focus {
 }
 
 /* Button styles */
-button {
+.button {
   width: 50%;
-  background-color: #151615;
+  background-color: #0c0c0c;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -46,7 +46,7 @@ button {
  
 }
 
-button:hover {
+.button:hover {
   background-color: #303731;
 }
 

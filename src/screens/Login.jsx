@@ -13,7 +13,7 @@ const Login = () => {
 
   return (
     <>
-      <div style={{ backgroundImage: `url(../assets/logo.jpg)`, height:"50%",float:"right" }} className="login-background">
+      <div className="login-background">
       <br></br>
       <h1>Login</h1>
         <form onSubmit={handleLogin}>
@@ -31,7 +31,8 @@ const Login = () => {
           autoComplete="current-password"
           />
         <br></br>
-           <button varient='contained' type="submit" >Login</button>
+           <button varient='contained'className='button' type="submit" >Login</button>
+           <a href=''><u>Signup</u></a>
           </div>
         </form>
       </div>    </>
