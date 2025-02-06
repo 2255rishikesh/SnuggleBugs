@@ -13,25 +13,28 @@ const Login = () => {
 
   return (
     <>
-      <div style={{ backgroundImage: `url(../assets/logo.jpg)`, height:"100vh" }} className="login-background">
-        <h1>Login</h1>
-        <form onSubmit={handleLogin} style={{flexDirection:"column"}}>
-         
+      <div style={{ backgroundImage: `url(../assets/logo.jpg)`, height:"50%",float:"right" }} className="login-background">
+      <br></br>
+      <h1>Login</h1>
+        <form onSubmit={handleLogin}>
+         <div  style={{flexDirection:"column", alignItems:"center", justifyContent:"center", flex:1, display:"flex"}}>
+
             <TextField
           id="outlined-text-input"
           label="Email"
           type="email"
-        />
+          /><br></br>
             <TextField
           id="outlined-password-input"
           label="Password"
           type="password"
           autoComplete="current-password"
-        />
-          <button type="submit">Login</button>
+          />
+        <br></br>
+           <button varient='contained' type="submit" >Login</button>
+          </div>
         </form>
-      </div>
-    </>
+      </div>    </>
   );
 };
 

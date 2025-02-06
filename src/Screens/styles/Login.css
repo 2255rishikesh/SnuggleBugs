@@ -1,52 +1,52 @@
 .login{
-    margin: 10px;
+  margin: 10px;
 }
 .login-input{
-    margin: 10px;
+  margin: 10px;
 
 }
 
 .login-background {
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  /* General input styles */
+/* General input styles */
 input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: 0.3s;
-    opacity: 0.6;
-  }
-  
-  /* Input focus effect */
-  input:focus {
-    border-color: #bab5b5;
-  }
-  
-  /* Button styles */
-  button {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: 0.3s;
+  opacity: 0.6;
+}
+
+/* Input focus effect */
+input:focus {
+  border-color: #bab5b5;
+}
+
+/* Button styles */
+button {
+  width: 50%;
+  background-color: #151615;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+ 
+}
+
+button:hover {
+  background-color: #303731;
+}
+
