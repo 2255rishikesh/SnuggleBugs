@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Screens/Home'
 import Login from './Screens/Login'
 import Signup from './Screens/Signup'
+import './Style.css'
 
 function Router() {
   return (
