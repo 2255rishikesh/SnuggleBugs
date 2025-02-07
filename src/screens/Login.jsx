@@ -14,29 +14,41 @@ const Login = () => {
   return (
     <>
       <div className="login-background">
-      <br></br>
-      <h1>Login</h1>
-        <form onSubmit={handleLogin}>
-         <div  style={{flexDirection:"column", alignItems:"center", justifyContent:"center", flex:1, display:"flex"}}>
-
-            <TextField
-          id="outlined-text-input"
-          label="Email"
-          type="email"
-          /><br></br>
-            <TextField
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          />
-        <br></br>
-           <button varient='contained'className='button' type="submit" >Login</button>
-           <a href='/signup'><u>Signup</u></a>
+        <div className="login-container">
+          <h1 className="login-title">Welcome Back</h1>
+          <form onSubmit={handleLogin}>
+            <div className="input-container">
+              <TextField
+                id="outlined-text-input"
+                label="Email"
+                type="email"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-field"
+                margin="normal"
+              />
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                fullWidth
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-field"
+                margin="normal"
+              />
+              <button className="login-button" type="submit">Login</button>
+            </div>
+          </form>
+          <div className="signup-link">
+            <p>Don't have an account? <a href="/signup" className="signup-text">Signup</a></p>
           </div>
-        </form>
-      </div>    </>
+        </div>
+      </div>
+    </>
   );
 };
 
 export default Login;
+
