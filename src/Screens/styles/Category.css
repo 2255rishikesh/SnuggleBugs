@@ -2,7 +2,7 @@
     width: 150px; /* Set a specific width */
     height: 150px; /* Set the same height to make it a square */
     object-fit: cover; /* Ensures the image covers the area without stretching */
-    border-radius: 50%; /* Makes the image circular */
+    border-radius: 100%; /* Makes the image circular */
     overflow: hidden; /* Ensures any overflow is hidden */
     object-position: center; /* Centers the image within the container */
   }
