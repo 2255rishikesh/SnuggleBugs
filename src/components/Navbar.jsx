@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Tooltip, InputBase, Button } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
-import { Search as SearchIcon, Bookmarks as LibraryIcon } from '@mui/icons-material';
+import { Search as SearchIcon } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -54,7 +54,7 @@ export default function NavBar() {
     <AppBar position="static" sx={{ backgroundColor: '#ba562b' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <LibraryIcon sx={{ mr: 2 }} />
+         
           <Typography
             variant="h6"
             noWrap
