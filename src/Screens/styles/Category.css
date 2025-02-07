@@ -1,48 +1,49 @@
-/* src/Card.css */
-.card {
-  width: 300px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+/* Category.css */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
 
-.card:hover {
-  transform: translateY(-10px);
+.card {
+  flex: 1 1 300px; /* Ensures the card takes up equal space and wraps if necessary */
+  max-width: 300px; /* Sets the maximum width of each card */
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .card-image {
   width: 100%;
-  height: 200px;
+  height: auto;
+  border-radius: 10%;
   object-fit: cover;
+  margin-bottom: 10px;
 }
 
-.card-content {
-  padding: 15px;
-}
-
-.card-title {
+.card-content h2 {
   font-size: 1.5em;
-  margin: 0;
-  color: #333;
+  margin: 10px 0;
 }
 
-.card-description {
+.card-content p {
   font-size: 1em;
-  color: #666;
   margin: 10px 0;
 }
 
 .card-button {
-  padding: 10px 15px;
-  background-color: #14181c;
+  padding: 10px 20px;
+  background-color: #101511;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 1em;
 }
 
 .card-button:hover {
