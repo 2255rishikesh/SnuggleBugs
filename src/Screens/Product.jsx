@@ -45,7 +45,7 @@ function Product() {
 
                             {/* Add to Wishlist Button with Cart Icon */}
                             <Button variant="outlined" startIcon={<ShoppingCart />} style={{ marginRight: '10px' }}>
-                                ADD TO WISHLIST
+                                ADD TO CART
                             </Button>
 
                             {/* Buy Now Button with custom color */}
