@@ -4,9 +4,11 @@ import './styles/home.css';
 import Cardcomponents from '../Components/Cardcomponents';
 import CategoryComp from '../Components/CategoryComp';
 import { Link } from 'react-router-dom';
+import ImageSlider from './styles/ImageSlider';
 
 function Home() {
   return (
+
     <div>
       <NavBar />
 
@@ -31,8 +33,14 @@ function Home() {
       </Link>
       <br />
       <br />
+      <div className="centered-heading-horizontal">
+  <h1>Welcome to Our Store</h1>
+  <ImageSlider />
+</div>
 
+       
       <CategoryComp />
+    
       <div
         style={{
           display: 'flex',
