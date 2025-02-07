@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Tooltip, InputBase, Button } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
-import { Menu as MenuIcon, Search as SearchIcon, Bookmarks as LibraryIcon } from '@mui/icons-material';
+import { Search as SearchIcon, Bookmarks as LibraryIcon } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -51,7 +51,7 @@ export default function NavBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: '#ba562b' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LibraryIcon sx={{ mr: 2 }} />
@@ -65,13 +65,10 @@ export default function NavBar() {
               color: 'inherit',
             }}
           >
-            {/* Add your site name here */}
-            My Site
+            SunggleBugs
           </Typography>
           <Box sx={{ flexGrow: 1, display: 'flex' }} justifyContent="flex-start">
-            <Link to="/products">
-              <Button color="inherit">Products</Button>
-            </Link>
+           
           </Box>
           <Search sx={{ mr: 3 }}>
             <SearchIconWrapper>
