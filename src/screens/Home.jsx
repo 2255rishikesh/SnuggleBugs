@@ -2,7 +2,7 @@ import React from 'react'
 import NavBar from '../Components/Navbar'
 import './styles/home.css'
 import Cardcomponents from '../Components/Cardcomponents'
-import Category from './Category'
+import CategoryComp from '../Components/CategoryComp'
 function Home() {
   return (
     <div>
@@ -13,7 +13,7 @@ function Home() {
     <br /> <br />
     <img src="https://momcozy.com/cdn/shop/files/20241026MOMCOZY-1200-1498-h_-head.jpg?v=1732953745&width=600"></img>
     <p>{Home.discrption}</p>
-    <Category></Category>
+    <CategoryComp/>
     </div>
 
   )
