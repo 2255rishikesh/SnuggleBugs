@@ -9,7 +9,7 @@ function Home() {
       <NavBar/>
       <img src="https://momcozy.com/cdn/shop/files/20240914MOMCOZY-first.jpg?v=1732959895&width=1200" className={'header'}/>
        <center><h1>The love laungauge</h1> </center>
-    <Cardcomponents id={'ert'} imgurl={"https://momcozy.com/cdn/shop/files/baby-first-2.jpg?v=1728640357&width=400"} title={"High chair"}/>
+    <Cardcomponents id={'ert'} imgurl={"https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg"} title={"Baby Gear"}/>
     <br /> <br />
     <CategoryComp/>
     <div style={{display: "flex", justifyContent: "space-between", width: "100vw", alignItems: "center"}}>
