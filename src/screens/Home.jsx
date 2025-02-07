@@ -11,8 +11,6 @@ function Home() {
        <center><h1>The love laungauge</h1> </center>
     <Cardcomponents id={'ert'} imgurl={"https://momcozy.com/cdn/shop/files/baby-first-2.jpg?v=1728640357&width=400"} title={"High chair"}/>
     <br /> <br />
-    <img src="https://momcozy.com/cdn/shop/files/20241026MOMCOZY-1200-1498-h_-head.jpg?v=1732953745&width=600"></img>
-    <p>{Home.discrption}</p>
     <CategoryComp/>
     <div style={{float:"right", alignItems:"center", flex:1, display:"flex",justifyContent:"space-between",width:"100vw"}}>  
     <img src="https://momcozy.com/cdn/shop/files/20241026MOMCOZY-1200-1498-h_-head.jpg?v=1732953745&width=600"></img>
