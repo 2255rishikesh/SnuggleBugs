@@ -15,7 +15,8 @@ function Home() {
     <div style={{float:"right", alignItems:"center", flex:1, display:"flex",justifyContent:"space-between",width:"100vw"}}>  
     <img src="https://momcozy.com/cdn/shop/files/20241026MOMCOZY-1200-1498-h_-head.jpg?v=1732953745&width=600"></img>
     <h1 >SnuggleBugs care, the best promise to babies</h1>
-    <p></p>
+   <br></br> <br>
+   </br>
     </div>
     </div>
 
