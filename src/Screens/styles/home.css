@@ -4,3 +4,8 @@
     object-fit: cover;  /* Ensures the image covers the area without stretching */
     object-position: top; /* Centers the image within the container */
 }
+.centered-heading-horizontal {
+    text-align: center; /* Centers text horizontally */
+    margin: 0 auto; /* Centers block-level elements like divs */
+  }
+  
