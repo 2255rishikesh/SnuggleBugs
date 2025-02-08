@@ -5,6 +5,7 @@ import Cardcomponents from '../Components/Cardcomponents';
 import CategoryComp from '../Components/CategoryComp';
 import { Link } from 'react-router-dom';
 import ImageSlider from './ImageSlider';
+import About from './About';
 
 function Home() {
   return (
@@ -113,10 +114,16 @@ function Home() {
             >
               Cozy beginnings, happy futures.
             </span>
+            <div>
+            </div>
           </div>
         </div>
       </div>
+      <div>
+        <About/>
+      </div>
     </div>
+    
   );
 }
 
