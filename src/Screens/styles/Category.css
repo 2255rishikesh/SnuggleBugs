@@ -1,51 +1,57 @@
-/* Category.css */
-
+/* src/styles/Category.css */
 .card-container {
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
-  padding: 20px;
+  justify-content: center;
 }
 
 .card {
-  flex: 1 1 300px; /* Ensures the card takes up equal space and wraps if necessary */
-  max-width: 300px; /* Sets the maximum width of each card */
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 300px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Hover effect */
 }
 
 .card-image {
   width: 100%;
-  height: auto;
-  border-radius: 10%;
+  height: 200px;
   object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
-.card-content h2 {
-  font-size: 1.5em;
-  margin: 10px 0;
-}
-
-.card-content p {
-  font-size: 1em;
-  margin: 10px 0;
+.card-description {
+  font-size: 1rem;
+  margin-bottom: 15px;
 }
 
 .card-button {
-  padding: 10px 20px;
-  background-color: #101511;
+  background-color: #ba562b;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
-  font-size: 1em;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .card-button:hover {
-  background-color: #0056b3;
+  background-color: #9e4423;
 }
