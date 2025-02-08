@@ -12,10 +12,11 @@ function Product() {
         price: '24,299.00',
         imageUrl:
             'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
+            
     });
 
     // Rating state
-    const [rating, setRating] = useState(2.5); // Default rating
+    const [rating, setRating] = useState(3.5); // Default rating
 
     // Handle the rating change
     const handleRatingChange = (event, newValue) => {
