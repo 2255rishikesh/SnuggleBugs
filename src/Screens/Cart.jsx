@@ -1,90 +1,61 @@
-// src/CartPage.js
 import React, { useState } from 'react';
-import './styles/Cart.css';
+import './styles/Cart.css'
+// Cart Component
+const Cart = () => {
+  // Cart Items State
+  const [cartItems, setCartItems] = useState([
+   { _id: 'errt',
+    title: 'Sport Isofix Car Seat Charcoal Grey',
+    description: 'A comfortable and safe car seat for children.',
+    price: '24,299.00',
+    imageUrl:
+        'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
 
-const CartPage = () => {
-  const [cart, setCart] = useState([]);
-  const [couponCode, setCouponCode] = useState('');
-  const [discount, setDiscount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+}]);
 
-  const addToCart = (product) => {
-    const existingProduct = cart.find(item => item.id === product.id);
-    if (existingProduct) {
-      const updatedCart = cart.map(item =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setCart(updatedCart);
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
-    calculateTotal([...cart, product]);
+  // Remove Item Function
+  const removeItem = (id) => {
+    setCartItems(cartItems.filter(item => item.id !== id));
   };
 
-  const removeFromCart = (index) => {
-    const newCart = cart.filter((_, i) => i !== index);
-    setCart(newCart);
-    calculateTotal(newCart);
-  };
-
-  const updateQuantity = (index, quantity) => {
-    const updatedCart = cart.map((item, i) =>
-      i === index ? { ...item, quantity } : item
-    );
-    setCart(updatedCart);
-    calculateTotal(updatedCart);
-  };
-
-  const applyCoupon = () => {
-    // Example coupon logic
-    if (couponCode === 'DISCOUNT10') {
-      setDiscount(0.1); // 10% discount
-    } else {
-      setDiscount(0);
-    }
-    calculateTotal(cart);
-  };
-
-  const calculateTotal = (cart) => {
-    const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    setTotalPrice(total - total * discount);
+  // Calculate Total Price
+  const getTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   return (
-    <div className="cart-page">
-      <h2>Shopping Cart</h2>
-      {cart.map((product, index) => (
-        <div key={index} className="cart-item">
-          <img src={product.image} alt={product.name} className="cart-image" />
-          <div className="cart-details">
-            <h3>{product.name}</h3>
-            <p>Size: {product.size}</p>
-            <input
-              type="number"
-              value={product.quantity}
-              onChange={(e) => updateQuantity(index, parseInt(e.target.value))}
-              min="1"
-            />
-            <p>Price: ${product.price}</p>
-            <button onClick={() => removeFromCart(index)}>Remove</button>
-          </div>
-        </div>
-      ))}
-      <div className="coupon-code">
-        <input
-          type="text"
-          value={couponCode}
-          onChange={(e) => setCouponCode(e.target.value)}
-          placeholder="Enter coupon code"
-        />
-        <button onClick={applyCoupon}>Apply Coupon</button>
+    <div className="cart-container">
+      <h1 className="cart-title">Your Shopping Cart</h1>
+
+      {cartItems.length === 0 ? (
+        <p className="empty-cart">Your cart is empty.</p>
+      ) : (
+        <ul className="cart-list">
+          {cartItems.map(item => (
+            <li key={item.id} className="cart-item">
+              <div className="item-info">
+                <p className="item-name">{item.name}</p>
+                <p className="item-price">Price: ${item.price}</p>
+                <p className="item-quantity">Qty: {item.quantity}</p>
+                <p className="item-total">Total: ${item.price * item.quantity}</p>
+              </div>
+              <button
+                className="remove-btn"
+                onClick={() => removeItem(item.id)}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="cart-summary">
+        <h2>Total: ${getTotal()}</h2>
+        <button className="checkout-btn">Proceed to Checkout</button>
       </div>
-      <div className="total">
-        <h3>Total Price: ${totalPrice.toFixed(2)}</h3>
-      </div>
-      <button className="checkout-button">Checkout</button>
     </div>
   );
 };
 
-export default CartPage;
+export default Cart;
