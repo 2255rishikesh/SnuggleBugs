@@ -9,20 +9,56 @@ const Cart = () => {
       _id: 'errt',
       title: 'Sport Isofix Car Seat Charcoal Grey',
       description: 'A comfortable and safe car seat for children.',
-      price: 24299.00, // Use number for price
-      quantity: 1, // Assuming quantity is 1 initially
+      price: 24299.00, // Price as a number
+      quantity: 1,
       imageUrl: 'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
     },
   ]);
+
+  const [coupon, setCoupon] = useState('');
+  const [discount, setDiscount] = useState(0); // Discount state (percentage)
 
   // Remove Item Function
   const removeItem = (id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
   };
 
+  // Increase Quantity
+  const increaseQuantity = (id) => {
+    setCartItems((prevItems) =>
+      prevItems.map(item =>
+        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
+    );
+  };
+
+  // Decrease Quantity
+  const decreaseQuantity = (id) => {
+    setCartItems((prevItems) =>
+      prevItems.map(item =>
+        item._id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+      )
+    );
+  };
+
   // Calculate Total Price
   const getTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    let total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    // Apply discount if there is one
+    total = total - (total * (discount / 100));
+    return total.toFixed(2);
+  };
+
+  // Handle Discount Coupon
+  const applyCoupon = () => {
+    if (coupon === 'DISCOUNT10') {
+      setDiscount(10); // 10% discount
+    } else if (coupon === 'DISCOUNT20') {
+      setDiscount(20); // 20% discount
+    } else {
+      alert('Invalid coupon code');
+      setDiscount(0);
+    }
   };
 
   return (
@@ -41,7 +77,26 @@ const Cart = () => {
               <div className="item-info">
                 <p className="item-name">{item.title}</p>
                 <p className="item-price">Price: ${item.price.toFixed(2)}</p>
-                <p className="item-quantity">Qty: {item.quantity}</p>
+                <div className="item-quantity">
+                  {/* Decrease Button */}
+                  <button
+                    onClick={() => decreaseQuantity(item._id)}
+                    className="quantity-btn"
+                    aria-label="Decrease quantity"
+                    disabled={item.quantity <= 1} // Disable button if quantity is 1
+                  >
+                    -
+                  </button>
+                  <span>{item.quantity}</span>
+                  {/* Increase Button */}
+                  <button
+                    onClick={() => increaseQuantity(item._id)}
+                    className="quantity-btn"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
                 <p className="item-total">Total: ${(item.price * item.quantity).toFixed(2)}</p>
               </div>
               <button
@@ -59,6 +114,20 @@ const Cart = () => {
       {cartItems.length > 0 && (
         <div className="cart-summary">
           <h2>Total: ${getTotal()}</h2>
+
+          <div className="coupon-section">
+            <input
+              type="text"
+              value={coupon}
+              onChange={(e) => setCoupon(e.target.value)}
+              placeholder="Enter coupon code"
+              aria-label="Coupon code input"
+            />
+            <button onClick={applyCoupon} className="apply-coupon-btn">
+              Apply Coupon
+            </button>
+          </div>
+
           <button className="checkout-btn">Proceed to Checkout</button>
         </div>
       )}

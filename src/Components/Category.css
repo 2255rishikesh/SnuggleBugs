@@ -28,4 +28,13 @@
   transform: scale(1.05);  /* Slight zoom effect on hover */
 }
 
+/* Circular Image Styling */
+.card-image {
+  width: 120px;  /* Adjust size as needed */
+  height: 120px;  /* Make sure it's a square */
+  border-radius: 50%;  /* Make the image circular */
+  object-fit: cover;  /* Ensure the image covers the circular area properly */
+  margin: 0 auto;  /* Center the image within the card */
+}
+
 /* Assuming Cardcomponents will be styled inside its own CSS */

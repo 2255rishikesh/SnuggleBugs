@@ -13,7 +13,7 @@ const Category = () => {
         <Link to="/category" className="category-link">
           <Cardcomponents 
             id={'ert'}
-            imgurl={"https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/original/mothercare/banner/318_202402290412_MC_CategoryTiles_180x180_babyclothing_100.jpg"} 
+            imgurl={"https://i.pinimg.com/originals/fb/5c/4b/fb5c4b1a647ac8998405ff85a42c7b93.jpg"} 
           />
         </Link>
 
