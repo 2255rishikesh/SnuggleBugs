@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import './styles/Cart.css';
 
-// Cart Component
 const Cart = () => {
   // Cart Items State
   const [cartItems, setCartItems] = useState([
@@ -9,23 +8,24 @@ const Cart = () => {
       _id: 'errt',
       title: 'Sport Isofix Car Seat Charcoal Grey',
       description: 'A comfortable and safe car seat for children.',
-      price: 24299.00, // Price as a number
+      price: 24299.00,
       quantity: 1,
       imageUrl: 'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
     },
   ]);
-
   const [coupon, setCoupon] = useState('');
-  const [discount, setDiscount] = useState(0); // Discount state (percentage)
+  const [discount, setDiscount] = useState(0);
 
-  // Remove Item Function
-  const removeItem = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
+  // Calculate Total Price
+  const getTotal = () => {
+    let total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    total = total - (total * (discount / 100)); // Apply discount if available
+    return total.toFixed(2);
   };
 
   // Increase Quantity
   const increaseQuantity = (id) => {
-    setCartItems((prevItems) =>
+    setCartItems(prevItems =>
       prevItems.map(item =>
         item._id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
@@ -34,86 +34,83 @@ const Cart = () => {
 
   // Decrease Quantity
   const decreaseQuantity = (id) => {
-    setCartItems((prevItems) =>
+    setCartItems(prevItems =>
       prevItems.map(item =>
         item._id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
       )
     );
   };
 
-  // Calculate Total Price
-  const getTotal = () => {
-    let total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    // Apply discount if there is one
-    total = total - (total * (discount / 100));
-    return total.toFixed(2);
-  };
-
   // Handle Discount Coupon
   const applyCoupon = () => {
     if (coupon === 'DISCOUNT10') {
-      setDiscount(10); // 10% discount
+      setDiscount(10);
     } else if (coupon === 'DISCOUNT20') {
-      setDiscount(20); // 20% discount
+      setDiscount(20);
     } else {
       alert('Invalid coupon code');
       setDiscount(0);
     }
   };
 
+  // Remove Item
+  const removeItem = (id) => {
+    setCartItems(prevItems => prevItems.filter(item => item._id !== id));
+  };
+
   return (
     <div className="cart-container">
-      <h1 className="cart-title">Your Shopping Cart</h1>
+      <h1 className="cart-title">Shopping Cart</h1>
 
       {cartItems.length === 0 ? (
         <p className="empty-cart">Your cart is empty.</p>
       ) : (
-        <ul className="cart-list">
-          {cartItems.map((item) => (
-            <li key={item._id} className="cart-item">
+        <div className="cart-items">
+          {cartItems.map(item => (
+            <div key={item._id} className="cart-item">
               <div className="item-image">
                 <img src={item.imageUrl} alt={item.title} />
               </div>
               <div className="item-info">
                 <p className="item-name">{item.title}</p>
-                <p className="item-price">Price: ${item.price.toFixed(2)}</p>
+                <p className="item-price">${item.price.toFixed(2)}</p>
+
                 <div className="item-quantity">
-                  {/* Decrease Button */}
                   <button
                     onClick={() => decreaseQuantity(item._id)}
                     className="quantity-btn"
-                    aria-label="Decrease quantity"
-                    disabled={item.quantity <= 1} // Disable button if quantity is 1
+                    disabled={item.quantity <= 1}
                   >
                     -
                   </button>
-                  <span>{item.quantity}</span>
-                  {/* Increase Button */}
+                  <span className="quantity-count">{item.quantity}</span>
                   <button
                     onClick={() => increaseQuantity(item._id)}
                     className="quantity-btn"
-                    aria-label="Increase quantity"
                   >
                     +
                   </button>
                 </div>
+
                 <p className="item-total">Total: ${(item.price * item.quantity).toFixed(2)}</p>
+                <button
+                  className="remove-btn"
+                  onClick={() => removeItem(item._id)}
+                >
+                  Remove
+                </button>
               </div>
-              <button
-                className="remove-btn"
-                onClick={() => removeItem(item._id)}
-                aria-label="Remove Item"
-              >
-                Remove
-              </button>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
 
       {cartItems.length > 0 && (
         <div className="cart-summary">
-          <h2>Total: ${getTotal()}</h2>
+          <div className="summary-line">
+            <span>Total Price:</span>
+            <span>${getTotal()}</span>
+          </div>
 
           <div className="coupon-section">
             <input
@@ -121,7 +118,6 @@ const Cart = () => {
               value={coupon}
               onChange={(e) => setCoupon(e.target.value)}
               placeholder="Enter coupon code"
-              aria-label="Coupon code input"
             />
             <button onClick={applyCoupon} className="apply-coupon-btn">
               Apply Coupon
