@@ -4,7 +4,7 @@ import './styles/home.css';
 import Cardcomponents from '../Components/Cardcomponents';
 import CategoryComp from '../Components/CategoryComp';
 import { Link } from 'react-router-dom';
-import ImageSlider from './styles/ImageSlider';
+import ImageSlider from './ImageSlider';
 
 function Home() {
   return (
