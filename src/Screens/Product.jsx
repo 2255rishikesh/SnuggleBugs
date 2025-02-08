@@ -3,7 +3,7 @@ import NavBar from '../Components/Navbar';
 import { Button, Typography, Stack, Rating, Box } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import Cart from './Cart';
+
 function Product() {
     // Product state
     const [product, setProduct] = useState({
@@ -47,7 +47,7 @@ function Product() {
                             <Button variant="outlined" startIcon={<ShoppingCart />} style={{ marginRight: '10px' }}>
                                 ADD TO CART
                             </Button>
-                        
+
                             {/* Buy Now Button with custom color */}
                             <Button
                                 variant="contained"
