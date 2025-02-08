@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Tooltip, InputBase, Button } from '@mui/material';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Tooltip, InputBase } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
+// Styled components
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -38,7 +39,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function NavBar() {
+const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const navigate = useNavigate();
 
@@ -50,11 +51,23 @@ export default function NavBar() {
     setAnchorElUser(null);
   };
 
+  // Menu items that could be reused
+  const menuItems = [
+    {
+      label: 'Sign In',
+      onClick: () => navigate('/login'),
+    },
+    {
+      label: 'My Cart',
+      onClick: () => navigate('/cart'),
+    },
+  ];
+
   return (
     <AppBar position="static" sx={{ backgroundColor: '#ba562b' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-         
+          {/* Logo or Brand Name */}
           <Typography
             variant="h6"
             noWrap
@@ -63,13 +76,18 @@ export default function NavBar() {
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
+              textDecoration: 'none',
             }}
+            component={Link}
+            to="/"
           >
             SunggleBugs
           </Typography>
-          <Box sx={{ flexGrow: 1, display: 'flex' }} justifyContent="flex-start">
-           
-          </Box>
+
+          {/* Spacer */}
+          <Box sx={{ flexGrow: 1 }} />
+
+          {/* Search Bar */}
           <Search sx={{ mr: 3 }}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -79,6 +97,8 @@ export default function NavBar() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
+          {/* User Menu */}
           <Box>
             <Tooltip title="Open user menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -100,16 +120,18 @@ export default function NavBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={() => { navigate("/login"); handleCloseUserMenu(); }}>
-                Sign In
-              </MenuItem>
-              <MenuItem onClick={() => { navigate("/cart"); handleCloseUserMenu(); }}>
-                My Cart
-              </MenuItem>
+              {/* Render Menu Items Dynamically */}
+              {menuItems.map((item, index) => (
+                <MenuItem key={index} onClick={() => { item.onClick(); handleCloseUserMenu(); }}>
+                  {item.label}
+                </MenuItem>
+              ))}
             </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
+
+export default NavBar;

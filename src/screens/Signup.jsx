@@ -1,61 +1,125 @@
 import React, { useState } from 'react';
 import './styles/Signup.css';
+import { TextField, Button, Typography, Link } from '@mui/material';
 
 const Signup = () => {
-  const [name, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleSignup = (e) => {
     e.preventDefault();
-    console.log("Signup details:", { name, email, password });
-    // Add further logic here for user registration (e.g., API call)
+
+    const newErrors = { name: '', email: '', password: '', confirmPassword: '' };
+
+    // Validation
+    if (!formData.name) {
+      newErrors.name = 'Username is required';
+    }
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    }
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+
+    if (!newErrors.name && !newErrors.email && !newErrors.password && !newErrors.confirmPassword) {
+      console.log("Signup details:", formData);
+      // Add your signup logic here (e.g., API call)
+    }
   };
 
   return (
     <div className="signup-background">
       <div className="signup-container">
-        <h2 className="signup-title">Create Account</h2>
+        <Typography variant="h4" className="signup-title">Create Account</Typography>
         <form onSubmit={handleSignup} className="signup-form">
-          <input
+          <TextField
+            label="Username"
             type="text"
-            placeholder="Enter Username"
-            value={name}
-            onChange={(e) => setUsername(e.target.value)}
-            className="input-field"
-            required
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={Boolean(errors.name)}
+            helperText={errors.name}
+            variant="outlined"
           />
-          <input
+          <TextField
+            label="Email"
             type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
-            required
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={Boolean(errors.email)}
+            helperText={errors.email}
+            variant="outlined"
           />
-          <input
+          <TextField
+            label="Password"
             type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
-            required
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={Boolean(errors.password)}
+            helperText={errors.password}
+            variant="outlined"
           />
-          <input
+          <TextField
+            label="Confirm Password"
             type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="input-field"
-            required
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+            error={Boolean(errors.confirmPassword)}
+            helperText={errors.confirmPassword}
+            variant="outlined"
           />
-          <button className="signup-button" type="submit">
+          <Button
+            className="signup-button"
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            size="large"
+          >
             Signup
-          </button>
+          </Button>
         </form>
         <div className="signin-link">
-          <p>Already have an account? <a href="/login" className="signin-text">Login</a></p>
+          <Typography variant="body2">
+            Already have an account? 
+            <Link href="/login" className="signin-text"> Login</Link>
+          </Typography>
         </div>
       </div>
     </div>
