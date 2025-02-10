@@ -11,7 +11,14 @@ function Product() {
         description: 'A comfortable and safe car seat for children.',
         price: '24,299.00',
         imageUrl:
-            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',      
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
+        additionalImages: [
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_2.jpg',
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_6.jpg', 
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_3.jpg', 
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_5.jpg', 
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_7.jpg',
+        ]
     });
 
     // Rating state
@@ -65,7 +72,7 @@ function Product() {
                                         backgroundColor: '#ba562b',
                                         color: 'white',
                                         '&:hover': { backgroundColor: 'darkgreen' },
-                                        borderRadius: '8px',
+                                        borderRadius: '9px',
                                         padding: '10px 20px',
                                     }}
                                 >
