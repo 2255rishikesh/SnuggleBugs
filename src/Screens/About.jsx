@@ -23,40 +23,7 @@ function About() {
                     </Typography>
                 </Box>
 
-                {/* Our Team Section */}
-                <Box sx={{ marginBottom: '40px' }}>
-                    <Typography variant="h4" sx={{ fontWeight: 600, textAlign: 'center' }}>Meet Our Team</Typography>
-                    <Stack direction="row" spacing={4} sx={{ justifyContent: 'center', marginTop: '20px' }}>
-                        {/* Add your team member images and info here */}
-                        <Box sx={{ textAlign: 'center' }}>
-                            <img
-                                src="https://via.placeholder.com/150"
-                                alt="Team Member 1"
-                                style={{ width: '150px', height: '150px', borderRadius: '50%' }}
-                            />
-                            <Typography variant="h6" sx={{ marginTop: '10px' }}>John Doe</Typography>
-                            <Typography variant="body2" sx={{ color: '#777' }}>CEO & Founder</Typography>
-                        </Box>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <img
-                                src="https://via.placeholder.com/150"
-                                alt="Team Member 2"
-                                style={{ width: '150px', height: '150px', borderRadius: '50%' }}
-                            />
-                            <Typography variant="h6" sx={{ marginTop: '10px' }}>Jane Smith</Typography>
-                            <Typography variant="body2" sx={{ color: '#777' }}>COO</Typography>
-                        </Box>
-                        <Box sx={{ textAlign: 'center' }}>
-                            <img
-                                src="https://via.placeholder.com/150"
-                                alt="Team Member 3"
-                                style={{ width: '150px', height: '150px', borderRadius: '50%' }}
-                            />
-                            <Typography variant="h6" sx={{ marginTop: '10px' }}>Alice Brown</Typography>
-                            <Typography variant="body2" sx={{ color: '#777' }}>Lead Developer</Typography>
-                        </Box>
-                    </Stack>
-                </Box>
+                
 
                 {/* Contact Us Section */}
                 <Box sx={{ textAlign: 'center' }}>
