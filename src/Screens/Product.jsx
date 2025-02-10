@@ -12,7 +12,13 @@ function Product() {
         price: '24,299.00',
         imageUrl:
             'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
-            
+        additionalImages: [
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_2.jpg',
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_6.jpg', 
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_3.jpg', 
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_5.jpg', 
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/18-nov-2022/492863593_7.jpg',
+        ]
     });
 
     // Rating state
@@ -30,15 +36,48 @@ function Product() {
             <div style={{ margin: '50px auto', maxWidth: '1200px', padding: '20px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Card sx={{ display: 'flex', width: '100%', borderRadius: '12px', boxShadow: 3 }}>
-                        <CardMedia
-                            component="img"
-                            sx={{ width: '50%', borderRadius: '12px' }}
-                            image={product.imageUrl}
-                            alt={product.title}
-                            style={{ transition: 'transform 0.5s ease' }}
-                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                        />
+                        <Stack sx={{ padding: '20px', width: '50%' }} spacing={2}>
+                            {/* Main Product Image */}
+                            <CardMedia
+                                component="img"
+                                sx={{ width: '100%', borderRadius: '12px', transition: 'transform 0.5s ease' }}
+                                image={product.imageUrl}
+                                alt={product.title}
+                                style={{ transition: 'transform 0.5s ease' }}
+                                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                            />
+                            
+                            {/* Horizontal Scrolling of Additional Images */}
+                            <div 
+                                style={{
+                                    display: 'flex',
+                                    overflowX: 'auto',
+                                    paddingTop: '10px',
+                                    gap: '10px',
+                                    scrollSnapType: 'x mandatory',
+                                    scrollbarWidth: 'thin', // For modern browsers
+                                }}
+                            >
+                                {product.additionalImages.map((image, index) => (
+                                    <img 
+                                        key={index} 
+                                        src={image} 
+                                        alt={`Additional Product Image ${index + 1}`} 
+                                        style={{
+                                            width: '200px',
+                                            height: 'auto',
+                                            borderRadius: '12px',
+                                            cursor: 'pointer',
+                                            scrollSnapAlign: 'center',
+                                            transition: 'transform 0.3s ease',
+                                        }} 
+                                        onClick={() => alert(`Image ${index + 1} clicked!`)} // Optional: Add functionality for clicking images
+                                    />
+                                ))}
+                            </div>
+                        </Stack>
+
                         <Stack sx={{ padding: '20px', width: '50%' }} spacing={2}>
                             <Typography variant="h4" sx={{ fontWeight: 600 }}>{product.title}</Typography>
                             <Typography variant="body1" color="textSecondary">{product.description}</Typography>
