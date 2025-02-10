@@ -123,8 +123,9 @@ const Cart = () => {
               Apply Coupon
             </button>
           </div>
-
+<div style={{float:"right",paddingBottom:"900px"}} >
           <button className="checkout-btn">Proceed to Checkout</button>
+          </div>
         </div>
       )}
     </div>
