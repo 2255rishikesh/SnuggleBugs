@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './styles/Login.css';
 import { TextField, Button, Typography, Link } from '@mui/material';
+import { useAuth } from '../Contexts/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,9 @@ const Login = () => {
     email: '',
     password: '',
   });
+
+    const {setUser, axiosInstance } = useAuth()
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +42,9 @@ const Login = () => {
     if (!newErrors.email && !newErrors.password) {
       // Add login logic here, like API call
       console.log('Logging in with:', formData);
+      axiosInstance.post('/auth/login',{
+        formData
+      })
     }
   };
 

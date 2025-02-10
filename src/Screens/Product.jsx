@@ -11,8 +11,7 @@ function Product() {
         description: 'A comfortable and safe car seat for children.',
         price: '24,299.00',
         imageUrl:
-            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
-            
+            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',      
     });
 
     // Rating state
@@ -27,6 +26,7 @@ function Product() {
     return (
         <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
             <NavBar />
+            
             <div style={{ margin: '50px auto', maxWidth: '1200px', padding: '20px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Card sx={{ display: 'flex', width: '100%', borderRadius: '12px', boxShadow: 3 }}>
@@ -35,7 +35,7 @@ function Product() {
                             sx={{ width: '50%', borderRadius: '12px' }}
                             image={product.imageUrl}
                             alt={product.title}
-                            style={{ transition: 'transform 0.5s ease' }}
+                            style={{ transition: 'transform 0.s ease' }}
                             onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                             onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                         />
