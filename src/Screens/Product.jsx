@@ -35,7 +35,7 @@ function Product() {
                             sx={{ width: '50%', borderRadius: '12px' }}
                             image={product.imageUrl}
                             alt={product.title}
-                            style={{ transition: 'transform 0.3s ease' }}
+                            style={{ transition: 'transform 0.5s ease' }}
                             onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                             onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                         />
