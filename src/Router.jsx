@@ -7,6 +7,7 @@ import Product from './Screens/Product'
 import Category from './Screens/Category'
 import Cart from './Screens/Cart'
 import './Style.css'
+import  Payment  from './Screens/Payment'
 
 function Router() {
   return (
@@ -18,6 +19,7 @@ function Router() {
         <Route path='/product' element={<Product/>} />
         <Route path='/category' element={<Category/>} />
         <Route path='/cart' element={<Cart/>} />
+        <Route path='/payment' element={<Payment/>} />
     </Routes>
     </BrowserRouter>
   )

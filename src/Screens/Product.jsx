@@ -65,7 +65,7 @@ function Product() {
                                         backgroundColor: '#ba562b',
                                         color: 'white',
                                         '&:hover': { backgroundColor: 'darkgreen' },
-                                        borderRadius: '8px',
+                                        borderRadius: '9px',
                                         padding: '10px 20px',
                                     }}
                                 >
