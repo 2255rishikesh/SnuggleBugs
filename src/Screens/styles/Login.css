@@ -1,4 +1,4 @@
-/* login-background: adds a background with gradient */
+
 .login-background {
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@
   background: linear-gradient(135deg, #f06, #48c6ef);
 }
 
-/* Center the login container */
+
 .login-container {
   background-color: white;
   border-radius: 8px;
@@ -18,7 +18,7 @@
   text-align: center;
 }
 
-/* Style for title text */
+
 .login-title {
   font-size: 2rem;
   font-weight: 600;
@@ -26,20 +26,20 @@
   margin-bottom: 20px;
 }
 
-/* Style for form inputs */
+
 .input-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Add margin, padding, and focus effects to the input fields */
+
 .input-field {
   width: 100%;
   margin-bottom: 20px;
 }
 
-/* Style the login button */
+
 .login-button {
   background-color: #2a9d8f;
   color: white;
@@ -56,7 +56,7 @@
   background-color: #21867a;
 }
 
-/* Style for the signup link */
+
 .signup-link {
   margin-top: 20px;
   font-size: 0.9rem;

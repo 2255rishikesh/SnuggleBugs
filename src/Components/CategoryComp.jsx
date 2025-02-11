@@ -1,8 +1,8 @@
-// src/Category.js
+
 import React from 'react';
-import './Category.css';  // Assuming styles are in Category.css
-import Cardcomponents from './Cardcomponents';  // Card component that displays individual items
-import { Link } from 'react-router-dom';  // Using Link for routing
+import './Category.css';  
+import Cardcomponents from './Cardcomponents'; 
+import { Link } from 'react-router-dom';  
 
 const Category = () => {
   return (
@@ -17,7 +17,7 @@ const Category = () => {
           />
         </Link>
 
-        {/* Add more cards or categories as needed */}
+        
         <Link to="/category" className="category-link">
           <Cardcomponents 
             id={'ert2'}

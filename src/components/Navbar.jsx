@@ -4,7 +4,7 @@ import { styled, alpha } from '@mui/material/styles';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
-// Styled components
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -51,7 +51,7 @@ const NavBar = () => {
     setAnchorElUser(null);
   };
 
-  // Menu items that could be reused
+ 
   const menuItems = [
     {
       label: 'Sign In',
@@ -67,7 +67,7 @@ const NavBar = () => {
     <AppBar position="static" sx={{ backgroundColor: '#ba562b' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Logo or Brand Name */}
+          
           <Typography
             variant="h6"
             noWrap
@@ -84,10 +84,10 @@ const NavBar = () => {
             SunggleBugs
           </Typography>
 
-          {/* Spacer */}
+         
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Search Bar */}
+         
           <Search sx={{ mr: 3 }}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -98,7 +98,7 @@ const NavBar = () => {
             />
           </Search>
 
-          {/* User Menu */}
+          
           <Box>
             <Tooltip title="Open user menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -120,7 +120,7 @@ const NavBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {/* Render Menu Items Dynamically */}
+              
               {menuItems.map((item, index) => (
                 <MenuItem key={index} onClick={() => { item.onClick(); handleCloseUserMenu(); }}>
                   {item.label}

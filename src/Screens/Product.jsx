@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import NavBar from '../Components/Navbar';
 import { Button, Typography, Stack, Rating, Box, Card, CardContent, CardMedia } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
-
+import { Link } from 'react-router-dom';
 function Product() {
-    // Product state
+    
     const [product, setProduct] = useState({
         _id: 'errt',
         title: 'Sport Isofix Car Seat Charcoal Grey',
@@ -21,13 +21,13 @@ function Product() {
         ]
     });
 
-    // Rating state
-    const [rating, setRating] = useState(3.5); // Default rating
+    
+    const [rating, setRating] = useState(3.5); 
 
-    // Handle the rating change
+    
     const handleRatingChange = (event, newValue) => {
         setRating(newValue);
-        console.log(`User rated: ${newValue}`); // For example, you can send this to a backend
+        console.log(`User rated: ${newValue}`); 
     };
 
     return (
@@ -37,7 +37,7 @@ function Product() {
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Card sx={{ display: 'flex', width: '100%', borderRadius: '12px', boxShadow: 3 }}>
                         <Stack sx={{ padding: '20px', width: '50%' }} spacing={2}>
-                            {/* Main Product Image */}
+                            
                             <CardMedia
                                 component="img"
                                 sx={{ width: '100%', borderRadius: '12px', transition: 'transform 0.5s ease' }}
@@ -48,7 +48,7 @@ function Product() {
                                 onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                             />
                             
-                            {/* Horizontal Scrolling of Additional Images */}
+                            
                             <div 
                                 style={{
                                     display: 'flex',
@@ -56,7 +56,7 @@ function Product() {
                                     paddingTop: '10px',
                                     gap: '10px',
                                     scrollSnapType: 'x mandatory',
-                                    scrollbarWidth: 'thin', // For modern browsers
+                                    scrollbarWidth: 'thin', 
                                 }}
                             >
                                 {product.additionalImages.map((image, index) => (
@@ -72,7 +72,7 @@ function Product() {
                                             scrollSnapAlign: 'center',
                                             transition: 'transform 0.3s ease',
                                         }} 
-                                        onClick={() => alert(`Image ${index + 1} clicked!`)} // Optional: Add functionality for clicking images
+                                        onClick={() => alert(`Image ${index + 1} clicked!`)} 
                                     />
                                 ))}
                             </div>
@@ -85,7 +85,8 @@ function Product() {
                             <Typography variant="h4" sx={{ fontWeight: 600, color: '#ba562b' }}>₹ {product.price}</Typography>
 
                             <Stack direction="row" spacing={2}>
-                                <Button
+                                <Link to="/Cart">
+                                <Button 
                                     variant="outlined"
                                     startIcon={<ShoppingCart />}
                                     sx={{
@@ -98,6 +99,8 @@ function Product() {
                                 >
                                     ADD TO CART
                                 </Button>
+                                </Link>
+                                <Link to="/Payment">
                                 <Button
                                     variant="contained"
                                     sx={{
@@ -110,9 +113,10 @@ function Product() {
                                 >
                                     Buy Now
                                 </Button>
+                                </Link>
                             </Stack>
 
-                            {/* Rating Component */}
+                            
                             <Stack spacing={1}>
                                 <Typography variant="h6">Rate this Product:</Typography>
                                 <Rating
@@ -125,7 +129,7 @@ function Product() {
                                 <Typography variant="body1">Current Rating: {rating}</Typography>
                             </Stack>
 
-                            {/* Product Description */}
+                    
                             <div style={{ marginTop: '30px', maxWidth: '500px' }}>
                                 <Typography variant="h5" sx={{ fontWeight: 600 }}>At a Glance</Typography>
                                 <Typography variant="body1" paragraph>

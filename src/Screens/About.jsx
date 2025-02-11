@@ -1,13 +1,13 @@
 import React from 'react';
 import { Typography, Box, Stack, Button } from '@mui/material';
-import NavBar from '../Components/Navbar'; // If you have a Navbar component
+import NavBar from '../Components/Navbar'; 
 
 function About() {
     return (
         <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
             
             <div style={{ padding: '50px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-                {/* About Us Section */}
+                
                 <Box sx={{ textAlign: 'center', marginBottom: '40px' }}>
                     <Typography variant="h2" sx={{ fontWeight: 600 }}>About Us</Typography>
                     <Typography variant="body1" sx={{ marginTop: '20px', color: '#555' }}>
@@ -15,7 +15,7 @@ function About() {
                     </Typography>
                 </Box>
 
-                {/* Our Mission Section */}
+                
                 <Box sx={{ marginBottom: '40px' }}>
                     <Typography variant="h4" sx={{ fontWeight: 600, textAlign: 'center' }}>Our Mission</Typography>
                     <Typography variant="body1" sx={{ marginTop: '20px', color: '#555' }}>
@@ -25,7 +25,7 @@ function About() {
 
                 
 
-                {/* Contact Us Section */}
+            
                 <Box sx={{ textAlign: 'center' }}>
                     <Typography variant="h4" sx={{ fontWeight: 600 }}>Contact Us</Typography>
                     <Typography variant="body1" sx={{ marginTop: '20px', color: '#555' }}>

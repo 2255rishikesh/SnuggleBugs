@@ -27,7 +27,7 @@ const Signup = () => {
 
     const newErrors = { name: '', email: '', password: '', confirmPassword: '' };
 
-    // Validation
+  
     if (!formData.name) {
       newErrors.name = 'Username is required';
     }
@@ -47,7 +47,7 @@ const Signup = () => {
 
     if (!newErrors.name && !newErrors.email && !newErrors.password && !newErrors.confirmPassword) {
       console.log("Signup details:", formData);
-      // Add your signup logic here (e.g., API call)
+      
     }
   };
 

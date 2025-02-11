@@ -22,7 +22,7 @@ function Home() {
         <h1>The love language</h1>
       </center>
 
-      {/* Wrap the Cardcomponents in Link to navigate to the Product page */}
+      
       <Link to="/product">
         <Cardcomponents
           id={'ert'}

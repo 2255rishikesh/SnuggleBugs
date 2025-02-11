@@ -1,4 +1,4 @@
-/* src/styles/Category.css */
+
 .card-container {
   padding: 20px;
   display: flex;
@@ -17,7 +17,7 @@
 }
 
 .card:hover {
-  transform: scale(1.05); /* Hover effect */
+  transform: scale(1.05); 
 }
 
 .card-image {

@@ -6,8 +6,8 @@ import NavBar from '../Components/Navbar';
 
 function Checkout() {
     const location = useLocation();
-    const product = location.state?.product; // Access the product passed via state
-    const [checkout, setcheckout] = useState({ subtotal:22000, total: 22000 })
+    const product = location.state?.product; 
+    const [checkout, setcheckout] = useState({ subtotal:24299, total: 24299 })
     useEffect(()=>{
       if(product){
         setcheckout({subtotal:product.price, total: product.price })

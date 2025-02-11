@@ -1,4 +1,4 @@
-// src/Card.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/Category.css';
@@ -12,7 +12,7 @@ function Card({ image, title, description, buttonText, onButtonClick }) {
       price: 24299.00,
       imageUrl: 'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
     };
-    // Store in localStorage
+    
     localStorage.setItem('cartItem', JSON.stringify(item));
   };
 

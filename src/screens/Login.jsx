@@ -36,7 +36,7 @@ const Login = () => {
     setErrors(newErrors);
 
     if (!newErrors.email && !newErrors.password) {
-      // Add login logic here, like API call
+      
       console.log('Logging in with:', formData);
     }
   };
