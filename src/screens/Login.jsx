@@ -44,7 +44,17 @@ const Login = () => {
       console.log('Logging in with:', formData);
       axiosInstance.post('/auth/login',{
         formData
+      }).then(({data})=>{
+        setUser(data.user)
+        localStorage.setItem('@Auth',JSON.stringify(data.user))
+        if(data.user.role=='admin'){
+          window.location.href = '/admin'
+        }else{
+          window.location.href = '/'
+
+        }
       })
+
     }
   };
 

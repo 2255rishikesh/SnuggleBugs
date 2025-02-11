@@ -8,6 +8,8 @@ import Cart from './Screens/Cart'
 import './Style.css'
 import AdminHome from './Screens/AdminHome'
 import Home from './Screens/Home'
+import Payment from './Screens/Payment'
+import Logout from './Screens/Logout'
 
 function Router() {
   return (
@@ -16,10 +18,12 @@ function Router() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/product' element={<Product />} />
-        <Route path='/category' element={<Category />} />
+        <Route path='/category/:categoryId/product/:id' element={<Product />} />
+        <Route path='/category/:id' element={<Category />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/admin' element={<AdminHome />} />
+        <Route path='/Payment' element={<Payment />} />
+        <Route path='/logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>
   )

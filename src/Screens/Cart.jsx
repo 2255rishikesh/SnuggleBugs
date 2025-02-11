@@ -1,74 +1,92 @@
-import React, { useState, useCallback } from "react";
-import './styles/Cart.css';
-
+import React, { useState, useCallback, useEffect } from "react";
+import { Grid, Card, CardContent, Typography, IconButton, Button, TextField } from "@mui/material";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useAuth } from "../Contexts/AuthContext";
 
 const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
-  <div className="cart-item">
-    <div className="item-image">
-      <img src={item.imageUrl} alt={item.title} />
+  <Card sx={{ display: 'flex', padding: 2, marginBottom: 2 }}>
+    <div style={{ marginRight: 16 }}>
+      <img
+        src={item.imageUrl}
+        alt={item.title}
+        style={{ width: 100, height: 100, objectFit: 'cover' }}
+      />
     </div>
-    <div className="item-info">
-      <p className="item-name">{item.title}</p>
-      <p className="item-price">${item.price.toFixed(2)}</p>
+    <CardContent sx={{ flexGrow: 1 }}>
+      <Typography variant="h6" gutterBottom>{item.title}</Typography>
+      <Typography variant="body2" color="textSecondary">${item.price.toFixed(2)}</Typography>
 
-      <div className="item-quantity">
-        <button
-          onClick={() => onDecrease(item._id)}
-          className="quantity-btn"
-          disabled={item.quantity <= 1}
-          aria-label="Decrease quantity"
-        >
-          −
-        </button>
-        <span className="quantity-count">{item.quantity}</span>
-        <button
-          onClick={() => onIncrease(item._id)}
-          className="quantity-btn"
-          aria-label="Increase quantity"
-        >
-          +
-        </button>
-      </div>
+      <Grid container spacing={1} alignItems="center" sx={{ marginTop: 1 }}>
+        <Grid item>
+          <IconButton onClick={() => onDecrease(item._id)} disabled={item.quantity <= 1}>
+            <RemoveCircleIcon />
+          </IconButton>
+        </Grid>
+        <Grid item>
+          <Typography variant="body2">{item.quantity}</Typography>
+        </Grid>
+        <Grid item>
+          <IconButton onClick={() => onIncrease(item._id)}>
+            <AddCircleIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
 
-      <p className="item-total">Total: ${(item.price * item.quantity).toFixed(2)}</p>
-      <button
-        className="remove-btn"
+      <Typography variant="body2" color="textPrimary" sx={{ marginTop: 1 }}>
+        Total: ${(item.price * item.quantity).toFixed(2)}
+      </Typography>
+
+      <IconButton
         onClick={() => onRemove(item._id)}
+        color="error"
+        sx={{ marginTop: 2 }}
         aria-label="Remove item"
       >
-        Remove
-      </button>
-    </div>
-  </div>
+        <DeleteIcon />
+      </IconButton>
+    </CardContent>
+  </Card>
 );
-
 
 const CartSummary = ({ total, onCouponChange, onApplyCoupon, coupon, onCheckout }) => (
-  <div className="cart-summary">
-    <div className="summary-line">
-      <span>Total Price:</span>
-      <span>${total}</span>
-    </div>
+  <Card sx={{ padding: 2, marginTop: 3 }}>
+    <Typography variant="h6" gutterBottom>Total Price: ${total}</Typography>
 
-    <div className="coupon-section">
-      <input
-        type="text"
-        value={coupon}
-        onChange={onCouponChange}
-        placeholder="Enter coupon code"
-        aria-label="Coupon code input"
-      />
-      <button onClick={onApplyCoupon} className="apply-coupon-btn" aria-label="Apply coupon">
-        Apply Coupon
-      </button>
-    </div>
+    <Grid container spacing={2} alignItems="center">
+      <Grid item xs={8}>
+        <TextField
+          fullWidth
+          label="Enter coupon code"
+          variant="outlined"
+          value={coupon}
+          onChange={onCouponChange}
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={onApplyCoupon}
+        >
+          Apply Coupon
+        </Button>
+      </Grid>
+    </Grid>
 
-    <button className="checkout-btn" onClick={onCheckout} aria-label="Proceed to checkout">
+    <Button
+      variant="contained"
+      color="secondary"
+      fullWidth
+      sx={{ marginTop: 2 }}
+      onClick={onCheckout}
+    >
       Proceed to Checkout
-    </button>
-  </div>
+    </Button>
+  </Card>
 );
-
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
@@ -82,15 +100,26 @@ const Cart = () => {
   ]);
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
-
+      const { axiosInstance , user} = useAuth();
   
+
+      useEffect(() => {
+        const fetchData = async () => {
+            const user1 = await localStorage.getItem('@Auth');
+            const { data } = await axiosInstance.get(`/product/cart/${user._id || JSON.parse(user1)._id}`);
+            if (data) {
+              setCartItems(data.products);
+            }
+        }
+        fetchData();
+    }, [user, axiosInstance]);
+
   const getTotal = useCallback(() => {
     let total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    total -= total * (discount / 100); 
+    total -= total * (discount / 100);
     return total.toFixed(2);
   }, [cartItems, discount]);
 
-  
   const updateQuantity = useCallback((id, action) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -101,7 +130,6 @@ const Cart = () => {
     );
   }, []);
 
-  
   const applyCoupon = useCallback(() => {
     if (coupon === 'DISCOUNT10') {
       setDiscount(10);
@@ -113,34 +141,30 @@ const Cart = () => {
     }
   }, [coupon]);
 
-  
   const removeItem = useCallback((id) => {
     setCartItems((prevItems) => prevItems.filter(item => item._id !== id));
   }, []);
 
-  
   const handleCheckout = () => {
     alert('Proceeding to checkout...');
   };
 
   return (
-    <div className="cart-container">
-      <h1 className="cart-title">Shopping Cart</h1>
+    <div style={{ padding: 16 }}>
+      <Typography variant="h4" gutterBottom>Shopping Cart</Typography>
 
       {cartItems.length === 0 ? (
-        <p className="empty-cart">Your cart is empty.</p>
+        <Typography variant="body1">Your cart is empty.</Typography>
       ) : (
-        <div className="cart-items">
-          {cartItems.map(item => (
-            <CartItem
-              key={item._id}
-              item={item}
-              onIncrease={() => updateQuantity(item._id, 'increase')}
-              onDecrease={() => updateQuantity(item._id, 'decrease')}
-              onRemove={removeItem}
-            />
-          ))}
-        </div>
+        cartItems.map(item => (
+          <CartItem
+            key={item._id}
+            item={item}
+            onIncrease={() => updateQuantity(item._id, 'increase')}
+            onDecrease={() => updateQuantity(item._id, 'decrease')}
+            onRemove={removeItem}
+          />
+        ))
       )}
 
       {cartItems.length > 0 && (

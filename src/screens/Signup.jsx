@@ -52,6 +52,15 @@ const Signup = () => {
       console.log("Signup details:", formData);
       axiosInstance.post('/auth/register',{
         formData
+      }).then(({data})=>{
+        setUser(data.user)
+        localStorage.setItem('@Auth',JSON.stringify(data.user))
+        if(data.user.role=='admin'){
+          window.location.href = '/admin'
+        }else{
+          window.location.href = '/'
+
+        }
       })
       
     }

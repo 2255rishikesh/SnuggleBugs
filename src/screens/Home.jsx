@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../Components/Navbar';
 import './styles/home.css';
 import Cardcomponents from '../Components/Cardcomponents';
@@ -6,8 +6,23 @@ import CategoryComp from '../Components/CategoryComp';
 import { Link } from 'react-router-dom';
 import ImageSlider from './ImageSlider';
 import About from './About';
+import { useAuth } from '../Contexts/AuthContext';
 
 function Home() {
+        const { axiosInstance } = useAuth()
+        const [categorys, setCategorys] = useState([])
+  
+  useEffect(()=>{
+    const fetchData = async () => {
+      const {data} = await axiosInstance.get('/categories')
+      if(data){
+        setCategorys(data)
+        
+      }
+    }
+    fetchData()
+  },[])
+
   return (
 
     <div>
@@ -40,7 +55,7 @@ function Home() {
 </div>
 
        
-      <CategoryComp />
+   {categorys &&   <CategoryComp data={categorys} />}
     
       <div
         style={{

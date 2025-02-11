@@ -1,45 +1,107 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Card, CardContent, CardMedia, Button, Typography, Grid, CircularProgress } from '@mui/material';
 import './styles/Category.css';
 import NavBar from '../Components/Navbar';
+import { useAuth } from '../Contexts/AuthContext';
 
-function Card({ image, title, description, buttonText, onButtonClick }) {
-  const addItemToCart = () => {
-    const item = {
-      _id: 'errt',
-      title: 'Sport Isofix Car Seat Charcoal Grey',
-      price: 24299.00,
-      imageUrl: 'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
-    };
-    
-    localStorage.setItem('cartItem', JSON.stringify(item));
-  };
+function CardItem({ product, addItemToCart ,categoryId}) {
+
 
   return (
-    <div className="card-container">
-      <NavBar />
-      
-      <div className="card">
-        <img 
-          src={"https://i5.walmartimages.com/asr/db3d3c75-01a7-4151-8561-70ecb8c251eb.5a84450ec772907331cf7ca1bf7e732a.jpeg"} 
-          alt={title} 
-          className="card-image" 
-        />
-        
-        <div className="card-content">
-          <h2 className="card-title">{title || "PatPat Newborn Baby Girls Clothes Long Sleeve Romper Jumpsuit Striped Pants Outfit Set 12-18 Months"}</h2>
-          <p className="card-description">{description || ""}</p>
+    <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3, transition: 'transform 0.3s', '&:hover': { transform: 'scale(1.05)' } }}>
+      <div onClick={() => window.location.href = `/category/${categoryId}/product/${product._id}`}>
 
-          <Link to="/cart">
-            <button className="card-button" onClick={addItemToCart}>
-              {buttonText || "₹999.00"}
-            </button>
-          </Link>
-        </div>
+        <CardMedia
+          component="img"
+          height="200"
+          image={product.imageUrl1 || 'https://via.placeholder.com/150'}
+          alt={product.title}
+          sx={{ objectFit: 'cover' }}
+        />
+        <CardContent>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
+            {product.title || 'Product Title Not Available'}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" paragraph>
+            {product.description || 'No description available'}
+          </Typography>
+          <Typography variant="h6" color="primary" sx={{ marginBottom: 2 }}>
+            {product.price ? `₹${product.price.toLocaleString()}` : '₹999.00'}
+          </Typography>
+        </CardContent>
+      </div>
+      <Link to="/cart" style={{ textDecoration: 'none' }}>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          onClick={() => addItemToCart(product)}
+        >
+          Add to Cart
+        </Button>
+      </Link>
+    </Card>
+  );
+}
+
+function CardList() {
+  const [products, setProduct] = useState([]);
+  const { axiosInstance , user} = useAuth();
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axiosInstance.get(`/categories/${id}`);
+        if (data && Array.isArray(data.items)) {
+          setProduct(data.items);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [axiosInstance, id]);
+
+  const addItemToCart = async (item) => {
+    axiosInstance.post('/product/cart/', {
+      userId: user._id,
+      productId: item._id
+    }).catch(err=>{
+      alert("error")
+    })
+
+  }
+
+  return (
+    <div className="category-page">
+      <NavBar />
+      <div className="card-container">
+        {loading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <Grid container spacing={2} justifyContent="center">
+            {products.length === 0 ? (
+              <Typography variant="h6" color="textSecondary" align="center">No products available</Typography>
+            ) : (
+              products.map((product) => (
+                <Grid item xs={12} sm={6} md={4} key={product._id} >
+                  <CardItem product={product} addItemToCart={addItemToCart} categoryId={id} />
+
+                </Grid>
+              ))
+            )}
+          </Grid>
+        )}
       </div>
     </div>
   );
 }
 
-export default Card;
+export default CardList;

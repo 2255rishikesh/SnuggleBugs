@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../Components/Navbar';
 import { Button, Typography, Stack, Rating, Box, Card, CardContent, CardMedia } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../Contexts/AuthContext';
 
 function Product() {
+    const navigate = useNavigate()
     const [product, setProduct] = useState({
         _id: 'errt',
         title: 'Sport Isofix Car Seat Charcoal Grey',
@@ -17,8 +18,38 @@ function Product() {
         ]
     });
 
+    const { axiosInstance , user} = useAuth();
+    const { id, categoryId } = useParams();
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const { data } = await axiosInstance.get(`/categories/${categoryId}/items/${id}`);
+          if (data ) {
+            setProduct(data)
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }, [axiosInstance, id]);
+  
+    const addItemToCart = async (item) => {
+      axiosInstance.post('/product/cart/', {
+        userId: user._id,
+        productId: item._id
+      }).catch(err=>{
+        alert("error")
+      })
+  
+    }
+  
+
     const [rating, setRating] = useState(3.5);
-    const { axiosInstance, user } = useAuth();
 
     const handleRatingChange = (event, newValue) => {
         setRating(newValue);
@@ -53,7 +84,7 @@ function Product() {
                             <CardMedia
                                 component="img"
                                 sx={{ width: '100%', borderRadius: '12px' }}
-                                image={product.imageUrl}
+                                image={product.imageUrl1}
                                 alt={product.title}
                             />
                             <div
@@ -65,25 +96,13 @@ function Product() {
                                     scrollSnapType: 'x mandatory',
                                 }}
                             >
-                                {product.additionalImages.map((image, index) => (
-                                    <img
-                                        key={index}
-                                        src={image}
-                                        alt={`Additional Product Image ${index + 1}`}
-                                        style={{
-                                            width: '200px',
-                                            height: 'auto',
-                                            borderRadius: '12px',
-                                            cursor: 'pointer',
-                                        }}
-                                    />
-                                ))}
+                             
                             </div>
                         </Stack>
                         <Stack sx={{ padding: '20px', width: '50%' }} spacing={2}>
                             <Typography variant="h4" sx={{ fontWeight: 600 }}>{product.title}</Typography>
                             <Typography variant="body1" color="textSecondary">{product.description}</Typography>
-                            <Typography variant="h6" sx={{ color: '#8c8c8c' }}>MRP: ₹ 26,999.00 Save ₹ 2,700.00</Typography>
+                            <Typography variant="h6" sx={{ color: '#8c8c8c' }}>MRP: ₹ {product.strikeprice} Save ₹ {product.strikeprice - product.price}</Typography>
                             <Typography variant="h4" sx={{ fontWeight: 600, color: '#ba562b' }}>₹ {product.price}</Typography>
 
                             <Stack direction="row" spacing={2}>
@@ -101,7 +120,6 @@ function Product() {
                                 >
                                     ADD TO CART
                                 </Button>
-                                <Link to="/Payment">
                                     <Button
                                         variant="contained"
                                         sx={{
@@ -111,10 +129,9 @@ function Product() {
                                             borderRadius: '9px',
                                             padding: '10px 20px',
                                         }}
-                                    >
+                                        onClick={() => (navigate('/Payment', { state: { product } }))}>
                                         Buy Now
                                     </Button>
-                                </Link>
                             </Stack>
 
                             {/* Rating Component */}
