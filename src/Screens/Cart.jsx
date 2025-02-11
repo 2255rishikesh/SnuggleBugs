@@ -4,6 +4,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAuth } from "../Contexts/AuthContext";
+import NavBar from "../Components/Navbar";
 
 const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
   <Card sx={{ display: 'flex', padding: 2, marginBottom: 2 }}>
@@ -106,7 +107,7 @@ const Cart = () => {
       useEffect(() => {
         const fetchData = async () => {
             const user1 = await localStorage.getItem('@Auth');
-            const { data } = await axiosInstance.get(`/product/cart/${user._id || JSON.parse(user1)._id}`);
+            const { data } = await axiosInstance.get(`/product/cart/${user?._id || JSON.parse(user1)?._id}`);
             if (data) {
               setCartItems(data.products);
             }
@@ -122,7 +123,7 @@ const Cart = () => {
 
   const updateQuantity = useCallback((id, action) => {
     setCartItems((prevItems) =>
-      prevItems.map((item) =>
+      prevItems?.map((item) =>
         item._id === id
           ? { ...item, quantity: action === 'increase' ? item.quantity + 1 : Math.max(1, item.quantity - 1) }
           : item
@@ -150,13 +151,14 @@ const Cart = () => {
   };
 
   return (
-    <div style={{ padding: 16 }}>
+    <div>
+      <NavBar/>
       <Typography variant="h4" gutterBottom>Shopping Cart</Typography>
 
-      {cartItems.length === 0 ? (
+      {cartItems?.length === 0 ? (
         <Typography variant="body1">Your cart is empty.</Typography>
       ) : (
-        cartItems.map(item => (
+        cartItems?.map(item => (
           <CartItem
             key={item._id}
             item={item}
@@ -167,7 +169,7 @@ const Cart = () => {
         ))
       )}
 
-      {cartItems.length > 0 && (
+      {cartItems?.length > 0 && (
         <CartSummary
           total={getTotal()}
           onCouponChange={(e) => setCoupon(e.target.value)}
