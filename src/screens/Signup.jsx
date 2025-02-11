@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './styles/Signup.css';
 import { TextField, Button, Typography, Link } from '@mui/material';
+import { useAuth } from '../Contexts/AuthContext';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
   });
+      const {setUser, axiosInstance } = useAuth()
+  
 
   const [errors, setErrors] = useState({
     name: '',
@@ -47,6 +50,9 @@ const Signup = () => {
 
     if (!newErrors.name && !newErrors.email && !newErrors.password && !newErrors.confirmPassword) {
       console.log("Signup details:", formData);
+      axiosInstance.post('/auth/register',{
+        formData
+      })
       
     }
   };
