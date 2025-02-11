@@ -33,6 +33,7 @@ function Product() {
     return (
         <div style={{ backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
             <NavBar />
+            
             <div style={{ margin: '50px auto', maxWidth: '1200px', padding: '20px' }}>
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Card sx={{ display: 'flex', width: '100%', borderRadius: '12px', boxShadow: 3 }}>
@@ -78,6 +79,15 @@ function Product() {
                             </div>
                         </Stack>
 
+                        <CardMedia
+                            component="img"
+                            sx={{ width: '50%', borderRadius: '12px' }}
+                            image={product.imageUrl}
+                            alt={product.title}
+                            style={{ transition: 'transform 0.s ease' }}
+                            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                        />
                         <Stack sx={{ padding: '20px', width: '50%' }} spacing={2}>
                             <Typography variant="h4" sx={{ fontWeight: 600 }}>{product.title}</Typography>
                             <Typography variant="body1" color="textSecondary">{product.description}</Typography>
