@@ -41,7 +41,7 @@ function Product() {
     const addItemToCart = async (item) => {
       axiosInstance.post('/product/cart/', {
         userId: user._id,
-        productId: item._id
+        product: item._id
       }).catch(err=>{
         alert("error")
       })

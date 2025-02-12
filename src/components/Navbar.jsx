@@ -4,7 +4,6 @@ import { styled, alpha } from '@mui/material/styles';
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
-
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -51,7 +50,6 @@ const NavBar = () => {
     setAnchorElUser(null);
   };
 
- 
   const menuItems = [
     {
       label: 'Sign In',
@@ -67,7 +65,7 @@ const NavBar = () => {
     <AppBar position="static" sx={{ backgroundColor: '#ba562b' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          
+          {/* Brand */}
           <Typography
             variant="h6"
             noWrap
@@ -84,50 +82,49 @@ const NavBar = () => {
             SunggleBugs
           </Typography>
 
-         
+          {/* Spacer */}
           <Box sx={{ flexGrow: 1 }} />
 
-         
-          <Search sx={{ mr: 3 }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          {/* Search Box and Avatar (Centered) */}
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Search sx={{ mr: 2 }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+            </Search>
 
-          
-          <Box>
+            {/* Avatar centered */}
+            
             <Tooltip title="Open user menu">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, display: 'flex', alignItems: 'baseline', justifyContent: 'center' , marginTop:4}}>
                 <Avatar />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              
-              {menuItems.map((item, index) => (
-                <MenuItem key={index} onClick={() => { item.onClick(); handleCloseUserMenu(); }}>
-                  {item.label}
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
+
+          {/* Menu */}
+          <Menu
+            sx={{ mt: '45px' }}
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {menuItems.map((item, index) => (
+              <MenuItem key={index} onClick={() => { item.onClick(); handleCloseUserMenu(); }}>
+                {item.label}
+              </MenuItem>
+            ))}
+          </Menu>
         </Toolbar>
       </Container>
     </AppBar>

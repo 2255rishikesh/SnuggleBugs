@@ -10,23 +10,25 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
   <Card sx={{ display: 'flex', padding: 2, marginBottom: 2 }}>
     <div style={{ marginRight: 16 }}>
       <img
-        src={item.imageUrl}
+        src={item.imageUrl1}  // Updated to reflect the correct imageUrl key
         alt={item.title}
         style={{ width: 100, height: 100, objectFit: 'cover' }}
       />
     </div>
     <CardContent sx={{ flexGrow: 1 }}>
       <Typography variant="h6" gutterBottom>{item.title}</Typography>
-      <Typography variant="body2" color="textSecondary">${item.price.toFixed(2)}</Typography>
+      <Typography variant="body2" color="textSecondary">
+        ${(parseFloat(item.price) || 0).toFixed(2)} {/* Ensure price is a number */}
+      </Typography>
 
       <Grid container spacing={1} alignItems="center" sx={{ marginTop: 1 }}>
         <Grid item>
-          <IconButton onClick={() => onDecrease(item._id)} disabled={item.quantity <= 1}>
+          <IconButton onClick={() => onDecrease(item._id)} disabled={item.qty <= 1}>
             <RemoveCircleIcon />
           </IconButton>
         </Grid>
         <Grid item>
-          <Typography variant="body2">{item.quantity}</Typography>
+          <Typography variant="body2">{item.qty}</Typography>
         </Grid>
         <Grid item>
           <IconButton onClick={() => onIncrease(item._id)}>
@@ -36,7 +38,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
       </Grid>
 
       <Typography variant="body2" color="textPrimary" sx={{ marginTop: 1 }}>
-        Total: ${(item.price * item.quantity).toFixed(2)}
+        Total: ${(parseFloat(item.price) * item.qty).toFixed(2)} {/* Ensure price is a number */}
       </Typography>
 
       <IconButton
@@ -90,42 +92,43 @@ const CartSummary = ({ total, onCouponChange, onApplyCoupon, coupon, onCheckout 
 );
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      _id: 'errt',
-      title: 'Sport Isofix Car Seat Charcoal Grey',
-      price: 24299.00,
-      quantity: 1,
-      imageUrl: 'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
-    },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
-      const { axiosInstance , user} = useAuth();
-  
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { axiosInstance, user } = useAuth();
 
-      useEffect(() => {
-        const fetchData = async () => {
-            const user1 = await localStorage.getItem('@Auth');
-            const { data } = await axiosInstance.get(`/product/cart/${user?._id || JSON.parse(user1)?._id}`);
-            if (data) {
-              setCartItems(data.products);
-            }
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const user1 = await localStorage.getItem('@Auth');
+        const { data } = await axiosInstance.get(`/product/cart/${user?._id || JSON.parse(user1)?._id}`);
+        if (data) {
+          setCartItems(data.products);
         }
-        fetchData();
-    }, [user, axiosInstance]);
+      } catch (error) {
+        setErrorMessage('Failed to fetch cart items');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [user, axiosInstance]);
 
   const getTotal = useCallback(() => {
-    let total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    let total = cartItems.reduce((acc, item) => acc + (parseFloat(item.price) * item.qty), 0);  // Ensure price is a number
     total -= total * (discount / 100);
     return total.toFixed(2);
   }, [cartItems, discount]);
 
   const updateQuantity = useCallback((id, action) => {
     setCartItems((prevItems) =>
-      prevItems?.map((item) =>
+      prevItems.map((item) =>
         item._id === id
-          ? { ...item, quantity: action === 'increase' ? item.quantity + 1 : Math.max(1, item.quantity - 1) }
+          ? { ...item, qty: action === 'increase' ? item.qty + 1 : Math.max(1, item.qty - 1) }
           : item
       )
     );
@@ -146,19 +149,39 @@ const Cart = () => {
     setCartItems((prevItems) => prevItems.filter(item => item._id !== id));
   }, []);
 
+  const addItemToCart = async (item) => {
+    setIsLoading(true);
+    try {
+      await axiosInstance.post('/product/cart/', {
+        userId: user._id,
+        product: item._id,
+      });
+      // Optimistically update the cart state
+      setCartItems((prevItems) => [...prevItems, item]);
+    } catch (err) {
+      alert("Error adding item to cart.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleCheckout = () => {
     alert('Proceeding to checkout...');
   };
 
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <Typography variant="h4" gutterBottom>Shopping Cart</Typography>
 
-      {cartItems?.length === 0 ? (
+      {isLoading ? (
+        <Typography variant="body1">Loading...</Typography>
+      ) : errorMessage ? (
+        <Typography variant="body1" color="error">{errorMessage}</Typography>
+      ) : cartItems.length === 0 ? (
         <Typography variant="body1">Your cart is empty.</Typography>
       ) : (
-        cartItems?.map(item => (
+        cartItems.map((item) => (
           <CartItem
             key={item._id}
             item={item}
@@ -169,7 +192,7 @@ const Cart = () => {
         ))
       )}
 
-      {cartItems?.length > 0 && (
+      {cartItems.length > 0 && (
         <CartSummary
           total={getTotal()}
           onCouponChange={(e) => setCoupon(e.target.value)}
