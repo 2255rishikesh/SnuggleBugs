@@ -14,7 +14,7 @@ function Product() {
         price: '24,299.00',
         imageUrl: 'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg',
         additionalImages: [
-            // additional images
+            
         ]
     });
 
@@ -80,7 +80,7 @@ function Product() {
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Card sx={{ display: 'flex', width: '100%', borderRadius: '12px', boxShadow: 3 }}>
                         <Stack sx={{ padding: '20px', width: '50%' }} spacing={2}>
-                            {/* Product Image and Carousel */}
+                            
                             <CardMedia
                                 component="img"
                                 sx={{ width: '100%', borderRadius: '12px' }}
@@ -134,7 +134,7 @@ function Product() {
                                     </Button>
                             </Stack>
 
-                            {/* Rating Component */}
+                            
                             <Stack spacing={1}>
                                 <Typography variant="h6">Rate this Product:</Typography>
                                 <Rating

@@ -10,7 +10,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
   <Card sx={{ display: 'flex', padding: 2, marginBottom: 2 }}>
     <div style={{ marginRight: 16 }}>
       <img
-        src={item.imageUrl1}  // Updated to reflect the correct imageUrl key
+        src={item.imageUrl1} 
         alt={item.title}
         style={{ width: 100, height: 100, objectFit: 'cover' }}
       />
@@ -18,7 +18,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
     <CardContent sx={{ flexGrow: 1 }}>
       <Typography variant="h6" gutterBottom>{item.title}</Typography>
       <Typography variant="body2" color="textSecondary">
-        ${(parseFloat(item.price) || 0).toFixed(2)} {/* Ensure price is a number */}
+        ${(parseFloat(item.price) || 0).toFixed(2)} 
       </Typography>
 
       <Grid container spacing={1} alignItems="center" sx={{ marginTop: 1 }}>
@@ -38,7 +38,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
       </Grid>
 
       <Typography variant="body2" color="textPrimary" sx={{ marginTop: 1 }}>
-        Total: ${(parseFloat(item.price) * item.qty).toFixed(2)} {/* Ensure price is a number */}
+        Total: ${(parseFloat(item.price) * item.qty).toFixed(2)}
       </Typography>
 
       <IconButton
@@ -119,7 +119,7 @@ const Cart = () => {
   }, [user, axiosInstance]);
 
   const getTotal = useCallback(() => {
-    let total = cartItems.reduce((acc, item) => acc + (parseFloat(item.price) * item.qty), 0);  // Ensure price is a number
+    let total = cartItems.reduce((acc, item) => acc + (parseFloat(item.price) * item.qty), 0);  
     total -= total * (discount / 100);
     return total.toFixed(2);
   }, [cartItems, discount]);
@@ -156,7 +156,7 @@ const Cart = () => {
         userId: user._id,
         product: item._id,
       });
-      // Optimistically update the cart state
+      
       setCartItems((prevItems) => [...prevItems, item]);
     } catch (err) {
       alert("Error adding item to cart.");
