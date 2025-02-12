@@ -9,136 +9,68 @@ import About from './About';
 import { useAuth } from '../Contexts/AuthContext';
 
 function Home() {
-        const { axiosInstance } = useAuth()
-        const [categorys, setCategorys] = useState([])
-  
-  useEffect(()=>{
+  const { axiosInstance } = useAuth();
+  const [categorys, setCategorys] = useState([]);
+
+  useEffect(() => {
     const fetchData = async () => {
-      const {data} = await axiosInstance.get('/categories')
-      if(data){
-        setCategorys(data)
-        
+      try {
+        const { data } = await axiosInstance.get('/categories');
+        if (data) {
+          setCategorys(data);
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
       }
-    }
-    fetchData()
-  },[])
+    };
+    fetchData();
+  }, []);
 
   return (
-
     <div>
       <NavBar />
-
       <img
         src="https://momcozy.com/cdn/shop/files/20240914MOMCOZY-first.jpg?v=1732959895&width=1200"
         className={'header'}
         alt="Header Image"
+        loading="lazy"
       />
       <center>
         <h1>The love language</h1>
       </center>
+<div style={{display:"flex", justifyContent:"flex-start", flexDirection:"row"}}>
+      {categorys && categorys[1]?.items?.map(item => (
+        <Link key={item._id} to={`/category/${categorys[1]?._id}/product/${item._id}`}>
+          <Cardcomponents
+            id={item._id}
+            imgurl={item.imageUrl1}
+            title={item.title}
+          />
+        </Link>
+      ))}
+      </div>
 
-      
-      <Link to="/product">
-        <Cardcomponents
-          id={'ert'}
-          imgurl={
-            'https://cdn.pixelspray.io/v2/black-bread-289bfa/XUefL6/wrkr/t.resize(h:600,w:600)/data/mothercare/06Aug2021/UA087-1.jpg'
-          }
-          title={'Baby Gear'}
-        />
-      </Link>
-      <br />
-      <br />
       <div className="centered-heading-horizontal">
-  <h1>Welcome to Our Store</h1>
-  <ImageSlider />
-</div>
+        <h1>Welcome to Our Store</h1>
+        <ImageSlider />
+      </div>
 
-       
-   {categorys &&   <CategoryComp data={categorys} />}
-    
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100vw',
-          alignItems: 'center',
-        }}
-      >
+      {categorys.length > 0 && <CategoryComp data={categorys} />}
+
+      <div className="promotional-section">
         <img
           src="https://momcozy.com/cdn/shop/files/20241026MOMCOZY-1200-1498-h_-head.jpg?v=1732953745&width=600"
           alt="SnuggleBugs"
-          style={{ flex: 1, maxWidth: '50%', height: 'auto' }}
         />
-        <div
-          style={{
-            flex: 1,
-            maxWidth: '50%',
-            paddingLeft: '20px',
-            paddingRight: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            backgroundColor: '#f9f9f9',
-            borderRadius: '8px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: '2.5rem',
-              color: '#2a9d8f',
-              fontWeight: '600',
-              lineHeight: '1.3',
-              marginBottom: '20px',
-            }}
-          >
-            SnuggleBugs care, the best promise to babies
-          </h1>
-          <p
-            style={{
-              fontSize: '1rem',
-              color: '#333',
-              lineHeight: '1.6',
-              fontWeight: '400',
-              textAlign: 'justify',
-              marginBottom: '20px',
-            }}
-          >
-            We focus on safe and caring baby products. We make sure only natural
-            and harmless materials are used and go out of our way to apply strict
-            and high standards of craftsmanship. What's more, we think highly of
-            product designs based on the concept of comfort and user experience.
-            To us, nothing is more important than a baby feeling cozy. When a
-            baby is cozy and taken good care of, we believe parents can breathe
-            and relax.
-          </p>
-          <div
-            style={{
-              textAlign: 'right',
-              marginTop: '20px',
-            }}
-          >
-            <span
-              style={{
-                fontSize: '1.2rem',
-                color: '#2a9d8f',
-                fontWeight: '500',
-                fontStyle: 'italic',
-              }}
-            >
-              Cozy beginnings, happy futures.
-            </span>
-            <div>
-            </div>
-          </div>
+        <div className="promotional-text">
+          <h1>SnuggleBugs care, the best promise to babies</h1>
+          <p>We focus on safe and caring baby products...</p>
+          <span>"Cozy beginnings, happy futures."</span>
         </div>
       </div>
-      <div>
-        <About/>
-      </div>
+
+      <About />
     </div>
-    
   );
 }
 
