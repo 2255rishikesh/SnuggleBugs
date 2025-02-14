@@ -65,7 +65,7 @@ const NavBar = () => {
     <AppBar position="static" sx={{ backgroundColor: '#ba562b' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* Brand */}
+          
           <Typography
             variant="h6"
             noWrap
@@ -81,11 +81,11 @@ const NavBar = () => {
           >
             SunggleBugs
           </Typography>
-
-          {/* Spacer */}
+           
+          
           <Box sx={{ flexGrow: 1 }} />
 
-          {/* Search Box and Avatar (Centered) */}
+          
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Search sx={{ mr: 2 }}>
               <SearchIconWrapper>
@@ -94,7 +94,7 @@ const NavBar = () => {
               <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
             </Search>
 
-            {/* Avatar centered */}
+            
             
             <Tooltip title="Open user menu">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, display: 'flex', alignItems: 'baseline', justifyContent: 'center' , marginTop:4}}>
@@ -103,7 +103,7 @@ const NavBar = () => {
             </Tooltip>
           </Box>
 
-          {/* Menu */}
+      
           <Menu
             sx={{ mt: '45px' }}
             anchorEl={anchorElUser}

@@ -10,7 +10,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
   <Card sx={{ display: 'flex', padding: 2, marginBottom: 2 }}>
     <div style={{ marginRight: 16 }}>
       <img
-        src={item.imageUrl1} 
+        src={item.imageUrl1}
         alt={item.title}
         style={{ width: 100, height: 100, objectFit: 'cover' }}
       />
@@ -18,7 +18,7 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
     <CardContent sx={{ flexGrow: 1 }}>
       <Typography variant="h6" gutterBottom>{item.title}</Typography>
       <Typography variant="body2" color="textSecondary">
-        ${(parseFloat(item.price) || 0).toFixed(2)} 
+        ${(parseFloat(item.price) || 0).toFixed(2)}
       </Typography>
 
       <Grid container spacing={1} alignItems="center" sx={{ marginTop: 1 }}>
@@ -41,14 +41,25 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove }) => (
         Total: ${(parseFloat(item.price) * item.qty).toFixed(2)}
       </Typography>
 
+      
       <IconButton
         onClick={() => onRemove(item._id)}
-        color="error"
+        color="primary"
         sx={{ marginTop: 2 }}
         aria-label="Remove item"
       >
         <DeleteIcon />
       </IconButton>
+
+      
+      <Button
+        variant="outlined"
+        color="primary"
+        sx={{ marginTop: 2, marginLeft: 2 }}
+        onClick={() => onRemove(item._id)}
+      >
+        Remove Item
+      </Button>
     </CardContent>
   </Card>
 );
